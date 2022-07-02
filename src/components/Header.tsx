@@ -19,7 +19,7 @@ const navItemStyle = { fontSize: "22px", marginRight: 0 };
 
 function Header() {
   return (
-    <header className="header border-b border-gray-300 sticky">
+    <header className="header border-b bg-white border-gray-300 sticky top-0 z-50">
       <div className="container mx-auto">
         <div className="flex justify-between">
           <div className="flex items-center justify-center">
