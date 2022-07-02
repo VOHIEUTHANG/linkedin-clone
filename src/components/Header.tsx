@@ -19,7 +19,7 @@ const navItemStyle = { fontSize: "22px", marginRight: 0 };
 
 function Header() {
   return (
-    <header className="header py-1">
+    <header className="header border-b border-gray-300 sticky">
       <div className="container mx-auto">
         <div className="flex justify-between">
           <div className="flex items-center justify-center">
@@ -32,6 +32,7 @@ function Header() {
             <Search
               placeholder="Search"
               onSearch={onSearch}
+              size="middle"
               style={{ width: 200, marginLeft: 10 }}
             />
           </div>
@@ -106,15 +107,6 @@ function Header() {
                 Work
                 <CaretDownOutlined />
               </div>
-            </div>
-            <div className="ml-6">
-              <a
-                href="#"
-                className="text-gray-500 hover:underline transition-all"
-              >
-                Get Hired Faster,
-                <br /> Try Premium Free
-              </a>
             </div>
           </div>
         </div>
