@@ -1,5 +1,8 @@
 import { FormOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
+import { collection, addDoc } from "firebase/firestore";
 import { Modal, Button, Avatar, Input } from "antd";
+import { success, error } from "./Toast";
+import { db } from "../firebase/db";
 import React, { useState } from "react";
 
 const { TextArea } = Input;
@@ -7,24 +10,46 @@ const { TextArea } = Input;
 export default function CreatePost({
   currentUserAvatar,
   userName,
+  setRefresh,
 }: {
   currentUserAvatar: string;
   userName: string;
+  setRefresh: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [postContent, setPostContent] = useState("");
 
-  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {};
-  const handleOk = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setModalVisible(false);
-    }, 3000);
+  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setPostContent(e.target.value);
   };
 
-  const handleCancel = () => {
-    setModalVisible(false);
+  const handleOk = () => {
+    const currentTime = new Date();
+    setLoading(true);
+    (async () => {
+      try {
+        const docRef = await addDoc(collection(db, "posts"), {
+          userAvatar: currentUserAvatar,
+          userName: userName,
+          createTime: `${currentTime.getDate()}-${
+            currentTime.getMonth() + 1
+          }-${currentTime.getFullYear()}`,
+          content: postContent,
+        });
+        console.log("Document written with ID: ", docRef.id);
+        setLoading(false);
+        success({ message: "Create post successfully" });
+        setPostContent("");
+        setModalVisible(false);
+        setRefresh((r) => !r);
+      } catch (e) {
+        console.error("Error adding document: ", e);
+        setLoading(false);
+        setModalVisible(false);
+        error({ message: "Error adding document !" });
+      }
+    })();
   };
 
   return (
@@ -44,12 +69,13 @@ export default function CreatePost({
         onCancel={() => setModalVisible(false)}
         footer={[
           <Button
+            className="rounded-lg overflow-hidden"
             key="submit"
             type="primary"
             loading={loading}
             onClick={handleOk}
           >
-            Submit
+            Post
           </Button>,
         ]}
       >
@@ -71,6 +97,7 @@ export default function CreatePost({
             maxLength={100}
             style={{ height: 120 }}
             onChange={onChange}
+            value={postContent}
           />
         </div>
       </Modal>

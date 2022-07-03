@@ -1,20 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CreatePost from "./CreatePost";
 import Post from "./Post";
+import { getPosts } from "../firebase/db";
+import { PostType } from "../types/post";
 const userAvatar = require("../assets/avatar.jpg");
 const Feed = () => {
+  const [posts, setPosts] = useState<PostType[]>([] as PostType[]);
+  const [refresh, setRefresh] = useState(false);
+  useEffect(() => {
+    getPosts().then((posts) => {
+      setPosts(posts as Array<PostType>);
+    });
+  }, [refresh]);
   return (
     <div>
-      <CreatePost currentUserAvatar={userAvatar} userName="Thắng Võ" />
+      <CreatePost
+        setRefresh={setRefresh}
+        currentUserAvatar={userAvatar}
+        userName="Thắng Võ"
+      />
       <div className="wrapper mt-4">
-        <Post
-          authorAvatar="https://images.wallpaperscraft.com/image/single/ocean_beach_aerial_view_134429_1280x720.jpg"
-          authorName="Devo"
-          createTime="7-2-2022"
-          title="Hello world!"
-          authorFollowerCount={30}
-          imgContent="https://images.wallpaperscraft.com/image/single/landscape_mountains_sun_140434_1280x720.jpg"
-        />
+        {posts.map((post, index) => {
+          return (
+            <Post
+              key={index}
+              authorAvatar={post.userAvatar}
+              authorName={post.userName}
+              createTime={post.createTime}
+              title={post.content}
+              authorFollowerCount={Math.floor(Math.random() * 100) + 1}
+              imgContent={""}
+            />
+          );
+        })}
       </div>
     </div>
   );
