@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar } from "antd";
+import { Avatar, Divider, Menu } from "antd";
 const backgroud = require("assets/bg.jpg");
 const avatar = require("assets/avatar.jpg");
 const Sidebar = () => {
@@ -30,6 +30,34 @@ const Sidebar = () => {
             Student at Học Viện Công Nghệ Bưu Chính Viễn Thông
           </div>
         </div>
+        <Divider style={{ margin: "10px 0" }} />
+        <div className="px-4 pb-4 ">
+          <div className="flex justify-between mb-2">
+            <span className="text-gray-600">Who visited you</span>
+            <span className="text-blue-600 font-bold">3,232</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-600 ">View on post</span>
+            <span className="text-blue-600 font-bold">1,232</span>
+          </div>
+        </div>
+      </div>
+      <div className="rounded-xl overflow-hidden bg-white py-3 mt-4">
+        <h4 className="px-3 pt-3"> Recent</h4>
+        <ul>
+          <li className="p-3 cursor-pointer hover:bg-gray-100 hover:text-blue-500 transition">
+            # ReactJS
+          </li>
+          <li className="p-3 cursor-pointer hover:bg-gray-100 hover:text-blue-500 transition">
+            # Javascript
+          </li>
+          <li className="p-3 cursor-pointer hover:bg-gray-100 hover:text-blue-500 transition">
+            # Boostrap
+          </li>
+          <li className="p-3 cursor-pointer hover:bg-gray-100 hover:text-blue-500 transition">
+            # Typescript
+          </li>
+        </ul>
       </div>
     </div>
   );

@@ -14,6 +14,7 @@
   margin-right: auto;
   margin-left: auto;
 }
+
 @media (min-width: 768px) {
   .container {
     width: 750px;
@@ -32,4 +33,16 @@
 
 #root .ant-tabs-top > .ant-tabs-nav {
   margin: 0;
+}
+
+textarea.ant-input {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  font-size: 1.1rem;
+}
+textarea.ant-input:placeholder-shown {
+  font-size: 1.1rem;
+  color: black;
+  opacity: 1;
 }

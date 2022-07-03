@@ -1,8 +1,9 @@
 import React from "react";
-import "./App.css";
+import "./App.scss";
 import { Row, Col } from "antd";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
+import Feed from "components/Feed";
 
 function App() {
   return (
@@ -11,13 +12,13 @@ function App() {
       <div className="app__content my-6 min-h-screen">
         <div className="container">
           <Row gutter={20}>
-            <Col span={6} className="rounded-2xl">
+            <Col span={5} className="rounded-2xl">
               <Sidebar />
             </Col>
-            <Col span={10}>
-              <div className="wrapper"></div>
+            <Col span={12}>
+              <Feed />
             </Col>
-            <Col span={8}>
+            <Col span={7}>
               <div className="wrapper"></div>
             </Col>
           </Row>
