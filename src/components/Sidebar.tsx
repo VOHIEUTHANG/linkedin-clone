@@ -1,8 +1,7 @@
 import React from "react";
 import { Avatar, Divider, Menu } from "antd";
 const backgroud = require("assets/bg.jpg");
-const avatar = require("assets/avatar.jpg");
-const Sidebar = () => {
+const Sidebar = ({ name, photoURL }: { name: string; photoURL: string }) => {
   return (
     <div className="sidebar ">
       <div className="rounded-xl overflow-hidden bg-white">
@@ -21,11 +20,11 @@ const Sidebar = () => {
               border: "2px solid white",
             }}
             size={64}
-            icon={<img src={avatar} />}
+            icon={<img src={photoURL} />}
           />
         </div>
         <div className="p-2">
-          <div className="text-center text-lg text-gray-800">Võ Hiếu Thắng</div>
+          <div className="text-center text-lg text-gray-800">{name}</div>
           <div className="text-center text-gray-500">
             Student at Học Viện Công Nghệ Bưu Chính Viễn Thông
           </div>

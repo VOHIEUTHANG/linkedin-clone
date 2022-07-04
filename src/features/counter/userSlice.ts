@@ -5,19 +5,13 @@ import { UserState } from "../../types/user";
 
 export const userSlice = createSlice({
   name: "user",
-  initialState: { user: {} as UserState },
+  initialState: {} as UserState,
   reducers: {
-    login: (
-      state: { user: UserState | null },
-      action: PayloadAction<UserState>
-    ) => {
-      state.user = action.payload;
+    login: (state: UserState | null, action: PayloadAction<UserState>) => {
+      return action.payload;
     },
-    logout: (
-      state: { user: UserState | null },
-      action: PayloadAction<null>
-    ) => {
-      state.user = null;
+    logout: (state: UserState | null, action: PayloadAction<null>) => {
+      return {} as UserState;
     },
   },
 });

@@ -3,8 +3,7 @@ import CreatePost from "./CreatePost";
 import Post from "./Post";
 import { getPosts } from "../firebase/db";
 import { PostType } from "../types/post";
-const userAvatar = require("../assets/avatar.jpg");
-const Feed = () => {
+const Feed = ({ name, photoURL }: { name: string; photoURL: string }) => {
   const [posts, setPosts] = useState<PostType[]>([] as PostType[]);
   const [refresh, setRefresh] = useState(false);
   useEffect(() => {
@@ -16,8 +15,8 @@ const Feed = () => {
     <div>
       <CreatePost
         setRefresh={setRefresh}
-        currentUserAvatar={userAvatar}
-        userName="Thắng Võ"
+        currentUserAvatar={photoURL}
+        userName={name}
       />
       <div className="wrapper mt-4">
         {posts.map((post, index) => {
